@@ -1,0 +1,22 @@
+<Page x:Class="Gym.Client.Pages.DashboardPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Dashboard">
+    <DockPanel>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="5">
+            <Button Content="Refresh" Click="Refresh_Click" Margin="2"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="5">
+            <TextBlock Text="Active Subscriptions:" Margin="2"/>
+            <TextBlock Text="{Binding Summary.ActiveSubscriptions}" Margin="2"/>
+            <TextBlock Text="Late Members:" Margin="10,2,2,2"/>
+            <TextBlock Text="{Binding Summary.LateMembers}" Margin="2"/>
+            <TextBlock Text="Outstanding Dues:" Margin="10,2,2,2"/>
+            <TextBlock Text="{Binding Summary.OutstandingDuesCents}" Margin="2"/>
+        </StackPanel>
+        <TextBlock Text="Late Members" FontWeight="Bold" Margin="5"/>
+        <DataGrid x:Name="LateGrid" Margin="5" AutoGenerateColumns="True"/>
+        <TextBlock Text="All Subscriptions" FontWeight="Bold" Margin="5"/>
+        <DataGrid x:Name="SubGrid" Margin="5" AutoGenerateColumns="True"/>
+    </DockPanel>
+</Page>

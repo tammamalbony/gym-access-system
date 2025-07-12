@@ -20,5 +20,10 @@ public class MappingProfile : Profile
             .ForCtorParam("Id", o => o.MapFrom(s => s.PlanId));
         CreateMap<PlanDto, Plan>()
             .ForMember(d => d.PlanId, o => o.MapFrom(s => s.Id));
+
+        CreateMap<Subscription, SubscriptionDto>()
+            .ForCtorParam("Id", o => o.MapFrom(s => s.SubscriptionId));
+        CreateMap<SubscriptionDto, Subscription>()
+            .ForMember(d => d.SubscriptionId, o => o.MapFrom(s => s.Id));
     }
 }

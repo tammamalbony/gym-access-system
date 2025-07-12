@@ -1,23 +1,29 @@
-﻿using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Gym.Client.Pages;
 
 namespace Gym.Client;
 
-/// <summary>
-/// Interaction logic for MainWindow.xaml
-/// </summary>
 public partial class MainWindow : Window
 {
+    private readonly ApiClient _api = new("http://localhost:5000/");
+
     public MainWindow()
     {
         InitializeComponent();
+    }
+
+    private void Dashboard_Click(object sender, RoutedEventArgs e)
+    {
+        MainFrame.Content = new DashboardPage(_api);
+    }
+
+    private void Members_Click(object sender, RoutedEventArgs e)
+    {
+        MainFrame.Content = new MembersPage(_api);
+    }
+
+    private void Plans_Click(object sender, RoutedEventArgs e)
+    {
+        MainFrame.Content = new PlansPage(_api);
     }
 }

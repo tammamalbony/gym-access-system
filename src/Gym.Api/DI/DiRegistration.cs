@@ -22,5 +22,7 @@ public static class DiRegistration
 
     public static IServiceCollection AddServices(this IServiceCollection s) => s
         .AddScoped<IMemberService, MemberService>()
-        .AddScoped<IPlanService, PlanService>();
+        .AddScoped<IPlanService, PlanService>()
+        .AddScoped<ISubscriptionService, SubscriptionService>()
+        .AddScoped<IDashboardService, DashboardService>();
 }

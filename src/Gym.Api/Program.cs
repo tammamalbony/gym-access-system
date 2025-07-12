@@ -59,6 +59,8 @@ app.UseAuthorization();
 app.MapGroup("/api")
    .MapAuthEndpoints()
    .MapMemberEndpoints()
-   .MapPlanEndpoints();
+   .MapPlanEndpoints()
+   .MapSubscriptionEndpoints()
+   .MapDashboardEndpoints();
 
 app.Run();
