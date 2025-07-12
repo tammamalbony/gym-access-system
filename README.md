@@ -49,9 +49,14 @@ GRANT ALL ON gym_access_system.* TO 'gymapp'@'%';
 
 # 4️⃣  Update API settings
 copy appsettings.Production.json.example appsettings.Production.json
+copy .env.example .env                     # connection string & JWT secret
 notepad appsettings.Production.json        # add SMTP, DB, subnet
+# optional: set INIT_DEMO_DATA=true to load sample plans and users
 
-# 5️⃣  Publish API as Windows service
+# 5️⃣  Run the API (development)
+dotnet run --project src/Gym.Api
+
+# Or publish as a Windows service for production
 dotnet publish src/Gym.Api -c Release -o C:\GymApi\dist --sc
 sc create GymApiSvc binPath= "C:\GymApi\dist\Gym.Api.exe" start= auto
 sc start GymApiSvc
@@ -64,6 +69,7 @@ msiexec /i installers/GymClientSetup.msi /qn
 ```
 
 Open browser → `http://<api-ip>:5000/swagger` to verify endpoints.
+See [src/Gym.Api/README.md](src/Gym.Api/README.md) for a concise guide to running the API locally and example requests.
 
 ---
 
@@ -84,12 +90,8 @@ Open browser → `http://<api-ip>:5000/swagger` to verify endpoints.
 * **Schema file:** `scripts/schema_v1.1_utf8mb4.sql`
   \*All tables created with `IF NOT EXISTS`, engine = InnoDB, charset = utf8mb4, collation = utf8mb4\_unicode\_ci\`.
 * **Demo data:** `scripts/demo_data_2025-07-12.sql` – 3 plans (Arabic, EN, BG), 3 members, tokens, logs.
-* **Backup task (daily 07:00):**
-
-```cmd
-mysqldump -ugymapp -pS3cureP@ss! --routines --events gym_access_system ^
-  > D:\Backups\gym_%DATE:~10,4%-%DATE:~4,2%-%DATE:~7,2%.sql
-```
+* **Built-in backup service:** set `BACKUP__DIR`, `BACKUP__INTERVALHOURS` and
+  `BACKUP__STARTHOUR` in `.env`. The API keeps the last 50 dumps in that folder.
 
 ---
 
@@ -134,6 +136,11 @@ C:\GymApp\
   }
 }
 ```
+
+Values can also be provided via environment variables or a `.env` file using the same keys, e.g. `CONNECTIONSTRINGS__DEFAULT` and `JWT__KEY`.
+Additional `.env` keys enable optional features such as demo data seeding and
+automatic backups: `INIT_DEMO_DATA`, `BACKUP__DIR`, `BACKUP__INTERVALHOURS`, and
+`BACKUP__STARTHOUR`.
 
 ---
 
