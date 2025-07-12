@@ -1,0 +1,17 @@
+<Page x:Class="Gym.Client.Pages.MembersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d"
+      Title="Members">
+    <DockPanel>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="5">
+            <Button Content="Refresh" Click="Refresh_Click" Margin="2" />
+            <Button Content="Add" Click="Add_Click" Margin="2" />
+            <Button Content="Edit" Click="Edit_Click" Margin="2" />
+            <Button Content="Delete" Click="Delete_Click" Margin="2" />
+        </StackPanel>
+        <DataGrid x:Name="Grid" Margin="5" AutoGenerateColumns="True"/>
+    </DockPanel>
+</Page>
