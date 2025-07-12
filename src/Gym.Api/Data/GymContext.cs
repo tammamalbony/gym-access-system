@@ -54,6 +54,7 @@ public class GymContext(DbContextOptions<GymContext> opts) : DbContext(opts)
         {
             e.ToTable("app_users");
             e.HasKey(u => u.UserId);
+            e.Property(u => u.UserId).HasColumnName("user_id");
             e.Property(u => u.Username).HasColumnName("username");
             e.Property(u => u.PasswordHash).HasColumnName("password_hash");
             e.Property(u => u.Role).HasColumnName("role").HasConversion<string>();
