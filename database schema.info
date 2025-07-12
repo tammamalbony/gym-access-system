@@ -1,0 +1,109 @@
+﻿DB: gym_access_system (utf8mb4)
+
+TABLE plans (
+  plan_id INT PK AI,
+  name VARCHAR(80) UNIQUE,
+  description VARCHAR(255),
+  price_cents INT,
+  duration_months TINYINT,
+  grace_days TINYINT,
+  is_active BOOL,
+  created_at TIMESTAMP,
+  updated_at TIMESTAMP
+);
+
+TABLE members (
+  member_id BIGINT PK AI,
+  first_name VARCHAR(60),
+  last_name VARCHAR(60),
+  email VARCHAR(120) UNIQUE,
+  phone VARCHAR(35),
+  date_of_birth DATE,
+  id_scan_path VARCHAR(255),
+  kyc_complete BOOL,
+  created_at TIMESTAMP,
+  updated_at TIMESTAMP
+);
+
+TABLE fingerprints (
+  fingerprint_id BIGINT PK AI,
+  member_id BIGINT FK→members,
+  finger_label ENUM(...),
+  template_blob LONGBLOB,
+  enrolled_at TIMESTAMP,
+  quality_score TINYINT
+);
+
+TABLE subscriptions (
+  subscription_id BIGINT PK AI,
+  member_id BIGINT FK→members,
+  plan_id INT FK→plans,
+  start_date DATE,
+  end_date DATE,
+  status ENUM('ACTIVE','EXPIRED','CANCELLED'),
+  created_at TIMESTAMP,
+  updated_at TIMESTAMP
+);
+
+TABLE payments (
+  payment_id BIGINT PK AI,
+  subscription_id BIGINT FK→subscriptions,
+  amount_cents INT,
+  paid_on DATE,
+  method ENUM(...),
+  txn_reference VARCHAR(120),
+  recorded_by VARCHAR(60),
+  created_at TIMESTAMP
+);
+
+TABLE controllers (
+  controller_id INT PK AI,
+  name VARCHAR(80),
+  ip_address VARCHAR(45) UNIQUE,
+  firmware_version VARCHAR(40),
+  last_seen TIMESTAMP
+);
+
+TABLE access_tokens (
+  token_id BIGINT PK AI,
+  member_id BIGINT FK→members,
+  token_value CHAR(64) UNIQUE,
+  issued_at TIMESTAMP,
+  expires_at TIMESTAMP,
+  revoked BOOL
+);
+
+TABLE controller_token_status (
+  controller_id INT FK→controllers,
+  token_id BIGINT FK→access_tokens,
+  pushed_at TIMESTAMP,
+  push_status ENUM('PENDING','SUCCESS','FAIL'),
+  PRIMARY KEY(controller_id,token_id)
+);
+
+TABLE access_logs (
+  log_id BIGINT PK AI,
+  controller_id INT FK→controllers,
+  member_id BIGINT FK→members,
+  event_type ENUM('GRANT','DENY'),
+  event_time TIMESTAMP,
+  reason VARCHAR(120)
+);
+
+TABLE app_users (
+  user_id INT PK AI,
+  username VARCHAR(60) UNIQUE,
+  password_hash CHAR(60),
+  role ENUM('DATA_ENTRY','ADMIN','SUPPORT'),
+  email VARCHAR(120),
+  is_enabled BOOL,
+  created_at TIMESTAMP
+);
+
+TABLE email_alerts (
+  alert_id BIGINT PK AI,
+  alert_type ENUM('OVERDUE','TOKEN_PUSH_FAIL','KYC_ISSUE'),
+  related_member BIGINT FK→members,
+  details VARCHAR(255),
+  sent_at TIMESTAMP
+);
