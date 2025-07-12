@@ -10,6 +10,7 @@ using DotNetEnv;
 
 Env.TraversePath().Load();
 var builder = WebApplication.CreateBuilder(args);
+builder.WebHost.UseUrls("http://localhost:5000");
 
 // ---------------- logging ----------------
 Log.Logger = new LoggerConfiguration()
