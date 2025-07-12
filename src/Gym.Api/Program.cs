@@ -2,6 +2,7 @@ using Gym.Api.Auth;
 using Gym.Api.Data;
 using Gym.Api.Endpoints;
 using Gym.Api.Middleware;
+using Gym.Api.Services;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using DotNetEnv;
@@ -26,6 +27,7 @@ builder.Services.AddJwtAuth(builder.Configuration);
 
 builder.Services.AddRepositories();
 builder.Services.AddServices();
+builder.Services.AddHostedService<BackupService>();
 
 builder.Services.AddAutoMapper(typeof(Program));
 
@@ -39,11 +41,17 @@ builder.Services.AddSwaggerGen(o =>
 
 // -------------- build  -------------------
 var app = builder.Build();
+
+await DbInitializer.InitAsync(app.Services, app.Configuration);
+
 app.UseSerilogRequestLogging();
 app.UseMiddleware<ExceptionMiddleware>();
 
-app.UseSwagger();
-app.UseSwaggerUI();
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseAuthentication();
 app.UseAuthorization();
@@ -54,39 +62,3 @@ app.MapGroup("/api")
    .MapPlanEndpoints();
 
 app.Run();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-app.UseHttpsRedirection();
-
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
-
-app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
