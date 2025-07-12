@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Gym.Client.Models;
 using Gym.Client.Dialogs;
+using MessageBox = System.Windows.MessageBox;
 
 namespace Gym.Client.Pages;
 

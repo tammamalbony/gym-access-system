@@ -53,7 +53,7 @@ public partial class MembersPage : Page
     private async void Delete_Click(object sender, RoutedEventArgs e)
     {
         if (Grid.SelectedItem is not MemberDto dto) return;
-        if (MessageBox.Show($"Delete {dto.FirstName}?", "Confirm", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+        if (System.Windows.MessageBox.Show($"Delete {dto.FirstName}?", "Confirm", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
         {
             await _api.DeleteMemberAsync(dto.Id);
             Items.Remove(dto);

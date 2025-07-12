@@ -53,7 +53,7 @@ public partial class PlansPage : Page
     private async void Delete_Click(object sender, RoutedEventArgs e)
     {
         if (Grid.SelectedItem is not PlanDto dto) return;
-        if (MessageBox.Show($"Delete {dto.Name}?", "Confirm", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+        if (System.Windows.MessageBox.Show($"Delete {dto.Name}?", "Confirm", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
         {
             await _api.DeletePlanAsync(dto.Id);
             Items.Remove(dto);

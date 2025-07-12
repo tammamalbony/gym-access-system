@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using Gym.Client.Models;
+using MessageBox = System.Windows.MessageBox;
 
 namespace Gym.Client.Pages;
 

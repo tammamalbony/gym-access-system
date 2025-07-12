@@ -4,6 +4,7 @@
 // -----------------------------
 using AutoMapper;
 using Gym.Api.Dtos;
+using Gym.Api.Models;
 using Gym.Api.Repositories;
 
 namespace Gym.Api.Services;

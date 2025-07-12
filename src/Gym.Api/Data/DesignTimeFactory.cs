@@ -1,6 +1,8 @@
 
 // Design‑time factory for EF migrations
 namespace Gym.Api.Data;
+
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
 public class DesignTimeFactory : IDesignTimeDbContextFactory<GymContext>
