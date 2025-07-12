@@ -68,4 +68,30 @@ public class ApiClient
 
     public Task<List<LateMemberDto>?> GetLateMembersAsync() =>
         _http.GetFromJsonAsync<List<LateMemberDto>>("api/dashboard/late-members");
+
+    public Task<List<AppUserDto>?> GetUsersAsync() =>
+        _http.GetFromJsonAsync<List<AppUserDto>>("api/users");
+
+    public async Task<AppUserDto?> AddUserAsync(AppUserDto dto, string password)
+    {
+        var resp = await _http.PostAsJsonAsync("api/users", new { dto.Id, dto.Username, dto.Role, dto.Email, dto.IsEnabled, dto.CreatedAt, password });
+        return await resp.Content.ReadFromJsonAsync<AppUserDto>();
+    }
+
+    public async Task<AppUserDto?> UpdateUserAsync(AppUserDto dto)
+    {
+        var resp = await _http.PutAsJsonAsync($"api/users/{dto.Id}", dto);
+        return await resp.Content.ReadFromJsonAsync<AppUserDto>();
+    }
+
+    public Task DeleteUserAsync(int id) => _http.DeleteAsync($"api/users/{id}");
+
+    public Task SetUserEnabledAsync(int id, bool enable) =>
+        _http.PutAsJsonAsync($"api/users/{id}/enable", enable);
+
+    public Task ChangePasswordAsync(int id, string pwd) =>
+        _http.PutAsJsonAsync($"api/users/{id}/password", pwd);
+
+    public Task<List<AccessLogDto>?> GetLogsAsync() =>
+        _http.GetFromJsonAsync<List<AccessLogDto>>("api/logs");
 }

@@ -18,11 +18,14 @@ public static class DiRegistration
         .AddScoped<IAccessTokenRepo, AccessTokenRepo>()
         .AddScoped<IControllerTokenStatusRepo, ControllerTokenStatusRepo>()
         .AddScoped<IAccessLogRepo, AccessLogRepo>()
+        .AddScoped<IAppUserRepo, AppUserRepo>()
         .AddScoped<IEmailAlertRepo, EmailAlertRepo>();
 
     public static IServiceCollection AddServices(this IServiceCollection s) => s
         .AddScoped<IMemberService, MemberService>()
         .AddScoped<IPlanService, PlanService>()
         .AddScoped<ISubscriptionService, SubscriptionService>()
-        .AddScoped<IDashboardService, DashboardService>();
+        .AddScoped<IDashboardService, DashboardService>()
+        .AddScoped<IUserService, UserService>()
+        .AddScoped<ILogService, LogService>();
 }

@@ -26,4 +26,14 @@ public partial class MainWindow : Window
     {
         MainFrame.Content = new PlansPage(_api);
     }
+
+    private void Users_Click(object sender, RoutedEventArgs e)
+    {
+        MainFrame.Content = new UsersPage(_api);
+    }
+
+    private void Logs_Click(object sender, RoutedEventArgs e)
+    {
+        MainFrame.Content = new LogsPage(_api);
+    }
 }
