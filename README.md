@@ -53,7 +53,10 @@ copy .env.example .env                     # connection string & JWT secret
 notepad appsettings.Production.json        # add SMTP, DB, subnet
 # optional: set INIT_DEMO_DATA=true to load sample plans and users
 
-# 5️⃣  Publish API as Windows service
+# 5️⃣  Run the API (development)
+dotnet run --project src/Gym.Api
+
+# Or publish as a Windows service for production
 dotnet publish src/Gym.Api -c Release -o C:\GymApi\dist --sc
 sc create GymApiSvc binPath= "C:\GymApi\dist\Gym.Api.exe" start= auto
 sc start GymApiSvc
@@ -66,6 +69,7 @@ msiexec /i installers/GymClientSetup.msi /qn
 ```
 
 Open browser → `http://<api-ip>:5000/swagger` to verify endpoints.
+See [src/Gym.Api/README.md](src/Gym.Api/README.md) for a concise guide to running the API locally and example requests.
 
 ---
 
