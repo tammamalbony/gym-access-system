@@ -62,6 +62,7 @@ app.MapGroup("/api")
    .MapPlanEndpoints()
    .MapSubscriptionEndpoints()
    .MapDashboardEndpoints()
+   .MapReminderEndpoints()
    .MapUserEndpoints()
    .MapLogEndpoints();
 

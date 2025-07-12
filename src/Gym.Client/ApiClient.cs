@@ -94,4 +94,10 @@ public class ApiClient
 
     public Task<List<AccessLogDto>?> GetLogsAsync() =>
         _http.GetFromJsonAsync<List<AccessLogDto>>("api/logs");
+
+    public Task<List<ExpiringSubDto>?> GetTomorrowExpirationsAsync() =>
+        _http.GetFromJsonAsync<List<ExpiringSubDto>>("api/reminders/tomorrow");
+
+    public Task SendReminderAsync(long subId) =>
+        _http.PostAsync($"api/reminders/{subId}/send", null);
 }

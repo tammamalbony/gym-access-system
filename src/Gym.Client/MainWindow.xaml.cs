@@ -36,4 +36,9 @@ public partial class MainWindow : Window
     {
         MainFrame.Content = new LogsPage(_api);
     }
+
+    private void Reminders_Click(object sender, RoutedEventArgs e)
+    {
+        MainFrame.Content = new RemindersPage(_api);
+    }
 }
