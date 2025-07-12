@@ -31,4 +31,9 @@ public class AccessLogRepo(GymContext db) : IAccessLogRepo
         await db.SaveChangesAsync();
         return exists;
     }
+
+    public Task<AccessLog?> GetLatestAsync() =>
+        db.AccessLogs.AsNoTracking()
+            .OrderByDescending(l => l.EventTime)
+            .FirstOrDefaultAsync();
 }

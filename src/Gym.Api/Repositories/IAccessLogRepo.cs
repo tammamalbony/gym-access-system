@@ -12,4 +12,5 @@ public interface IAccessLogRepo
     Task<AccessLog> AddAsync(AccessLog log);
     Task<AccessLog?> UpdateAsync(AccessLog log);
     Task<bool> DeleteAsync(long id);
+    Task<AccessLog?> GetLatestAsync();
 }

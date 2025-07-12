@@ -1,0 +1,12 @@
+<Page x:Class="Gym.Client.Pages.RemindersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Reminders">
+    <DockPanel>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="5">
+            <Button Content="Refresh" Click="Refresh_Click" Margin="2"/>
+            <Button Content="Send Email" Click="Send_Click" Margin="2"/>
+        </StackPanel>
+        <DataGrid x:Name="Grid" Margin="5" AutoGenerateColumns="True"/>
+    </DockPanel>
+</Page>

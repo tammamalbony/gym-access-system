@@ -31,4 +31,10 @@ public class SubscriptionRepo(GymContext db) : ISubscriptionRepo
         await db.SaveChangesAsync();
         return exists;
     }
+
+    public Task<Subscription?> GetActiveByMemberAsync(long memberId) =>
+        db.Subscriptions.AsNoTracking()
+            .Where(s => s.MemberId == memberId && s.Status == SubscriptionStatus.ACTIVE)
+            .OrderByDescending(s => s.EndDate)
+            .FirstOrDefaultAsync();
 }

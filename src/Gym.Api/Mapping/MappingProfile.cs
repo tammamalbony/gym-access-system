@@ -5,6 +5,7 @@
 using AutoMapper;
 using Gym.Api.Dtos;
 using Gym.Api.Models;
+using System;
 
 namespace Gym.Api.Mapping;
 public class MappingProfile : Profile
@@ -20,5 +21,25 @@ public class MappingProfile : Profile
             .ForCtorParam("Id", o => o.MapFrom(s => s.PlanId));
         CreateMap<PlanDto, Plan>()
             .ForMember(d => d.PlanId, o => o.MapFrom(s => s.Id));
+
+        CreateMap<Subscription, SubscriptionDto>()
+            .ForCtorParam("Id", o => o.MapFrom(s => s.SubscriptionId));
+        CreateMap<SubscriptionDto, Subscription>()
+            .ForMember(d => d.SubscriptionId, o => o.MapFrom(s => s.Id));
+
+        CreateMap<AppUser, AppUserDto>()
+            .ForCtorParam("Id", o => o.MapFrom(s => s.UserId))
+            .ForCtorParam("Role", o => o.MapFrom(s => s.Role.ToString()));
+        CreateMap<AppUserDto, AppUser>()
+            .ForMember(d => d.UserId, o => o.MapFrom(s => s.Id))
+            .ForMember(d => d.Role, o => o.MapFrom(s => Enum.Parse<UserRole>(s.Role)));
+
+        CreateMap<AccessLog, AccessLogDto>()
+            .ForCtorParam("Id", o => o.MapFrom(s => s.LogId))
+            .ForCtorParam("EventType", o => o.MapFrom(s => s.EventType.ToString()));
+
+        CreateMap<EmailAlert, EmailAlertDto>()
+            .ForCtorParam("Id", o => o.MapFrom(s => s.AlertId))
+            .ForCtorParam("AlertType", o => o.MapFrom(s => s.AlertType.ToString()));
     }
 }

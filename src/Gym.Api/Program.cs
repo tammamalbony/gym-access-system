@@ -3,6 +3,7 @@ using Gym.Api.Data;
 using Gym.Api.Endpoints;
 using Gym.Api.Middleware;
 using Gym.Api.Services;
+using Gym.Api.Models;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using DotNetEnv;
@@ -24,6 +25,7 @@ builder.Services.AddDbContext<GymContext>(opt =>
     opt.UseMySql(cs, ServerVersion.AutoDetect(cs)));
 
 builder.Services.AddJwtAuth(builder.Configuration);
+builder.Services.Configure<AlertOptions>(builder.Configuration.GetSection("Alerts"));
 
 builder.Services.AddRepositories();
 builder.Services.AddServices();
@@ -59,6 +61,12 @@ app.UseAuthorization();
 app.MapGroup("/api")
    .MapAuthEndpoints()
    .MapMemberEndpoints()
-   .MapPlanEndpoints();
+   .MapPlanEndpoints()
+   .MapSubscriptionEndpoints()
+   .MapDashboardEndpoints()
+   .MapReminderEndpoints()
+   .MapAlertEndpoints()
+   .MapUserEndpoints()
+   .MapLogEndpoints();
 
 app.Run();
