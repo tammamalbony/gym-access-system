@@ -31,6 +31,8 @@ builder.Services.AddRepositories();
 builder.Services.AddServices();
 builder.Services.AddHostedService<BackupService>();
 
+builder.Services.AddAuthorization();
+
 builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddEndpointsApiExplorer();
