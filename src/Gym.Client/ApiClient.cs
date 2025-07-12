@@ -61,6 +61,9 @@ public class ApiClient
         return await resp.Content.ReadFromJsonAsync<SubscriptionDto>();
     }
 
+    public Task<SubscriptionDto?> GetActiveSubscriptionAsync(long memberId) =>
+        _http.GetFromJsonAsync<SubscriptionDto>($"api/subscriptions/member/{memberId}");
+
     public Task DeleteSubscriptionAsync(long id) => _http.DeleteAsync($"api/subscriptions/{id}");
 
     public Task<DashboardDto?> GetDashboardSummaryAsync() =>
@@ -94,6 +97,12 @@ public class ApiClient
 
     public Task<List<AccessLogDto>?> GetLogsAsync() =>
         _http.GetFromJsonAsync<List<AccessLogDto>>("api/logs");
+
+    public Task<AccessLogDto?> GetLatestLogAsync() =>
+        _http.GetFromJsonAsync<AccessLogDto>("api/logs/latest");
+
+    public Task<List<EmailAlertDto>?> GetAlertsAsync() =>
+        _http.GetFromJsonAsync<List<EmailAlertDto>>("api/alerts");
 
     public Task<List<ExpiringSubDto>?> GetTomorrowExpirationsAsync() =>
         _http.GetFromJsonAsync<List<ExpiringSubDto>>("api/reminders/tomorrow");

@@ -12,6 +12,7 @@ public interface ISubscriptionService
 {
     Task<IEnumerable<SubscriptionDto>> All();
     Task<SubscriptionDto?> One(long id);
+    Task<SubscriptionDto?> ActiveForMember(long memberId);
     Task<SubscriptionDto> Add(SubscriptionDto dto);
     Task<SubscriptionDto?> Update(SubscriptionDto dto);
     Task<bool> Delete(long id);
@@ -24,6 +25,9 @@ public class SubscriptionService(IMapper map, ISubscriptionRepo repo) : ISubscri
 
     public async Task<SubscriptionDto?> One(long id) =>
         map.Map<SubscriptionDto?>(await repo.GetAsync(id));
+
+    public async Task<SubscriptionDto?> ActiveForMember(long memberId) =>
+        map.Map<SubscriptionDto?>(await repo.GetActiveByMemberAsync(memberId));
 
     public async Task<SubscriptionDto> Add(SubscriptionDto dto) =>
         map.Map<SubscriptionDto>(await repo.AddAsync(map.Map<Subscription>(dto)));

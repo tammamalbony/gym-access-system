@@ -14,6 +14,7 @@
             <Button Content="Users" Click="Users_Click" Margin="2"/>
             <Button Content="Logs" Click="Logs_Click" Margin="2"/>
             <Button Content="Reminders" Click="Reminders_Click" Margin="2"/>
+            <Button Content="Alerts" Click="Alerts_Click" Margin="2"/>
         </StackPanel>
         <Frame x:Name="MainFrame"/>
     </DockPanel>

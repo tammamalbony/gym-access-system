@@ -41,4 +41,9 @@ public partial class MainWindow : Window
     {
         MainFrame.Content = new RemindersPage(_api);
     }
+
+    private void Alerts_Click(object sender, RoutedEventArgs e)
+    {
+        MainFrame.Content = new AlertsPage(_api);
+    }
 }

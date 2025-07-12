@@ -12,6 +12,8 @@ public static class LogEndpoints
     {
         var group = g.MapGroup("logs").RequireAuthorization(Roles.ADMIN);
         group.MapGet("", async (ILogService svc) => Results.Ok(await svc.All()));
+        group.MapGet("latest", async (ILogService svc) =>
+            await svc.Latest() is { } dto ? Results.Ok(dto) : Results.NoContent());
         return g;
     }
 }

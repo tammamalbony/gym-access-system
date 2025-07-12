@@ -37,5 +37,9 @@ public class MappingProfile : Profile
         CreateMap<AccessLog, AccessLogDto>()
             .ForCtorParam("Id", o => o.MapFrom(s => s.LogId))
             .ForCtorParam("EventType", o => o.MapFrom(s => s.EventType.ToString()));
+
+        CreateMap<EmailAlert, EmailAlertDto>()
+            .ForCtorParam("Id", o => o.MapFrom(s => s.AlertId))
+            .ForCtorParam("AlertType", o => o.MapFrom(s => s.AlertType.ToString()));
     }
 }

@@ -12,4 +12,5 @@ public interface ISubscriptionRepo
     Task<Subscription> AddAsync(Subscription s);
     Task<Subscription?> UpdateAsync(Subscription s);
     Task<bool> DeleteAsync(long id);
+    Task<Subscription?> GetActiveByMemberAsync(long memberId);
 }

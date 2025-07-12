@@ -1,6 +1,8 @@
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
+using System.Drawing;
 using Gym.Client.Models;
 
 namespace Gym.Client.Pages;
@@ -37,5 +39,24 @@ public partial class DashboardPage : Page
 
         DataContext = null;
         DataContext = this;
+    }
+
+    private async void Latest_Click(object sender, RoutedEventArgs e)
+    {
+        var log = await _api.GetLatestLogAsync();
+        if (log is null) return;
+        var sub = await _api.GetActiveSubscriptionAsync(log.MemberId);
+        var status = sub is null ? "No active subscription" :
+            (sub.EndDate.ToDateTime(TimeOnly.MinValue) < DateTime.UtcNow
+                ? "Expired" : "Active");
+        System.Windows.Forms.NotifyIcon ni = new();
+        ni.Visible = true;
+        ni.Icon = System.Drawing.SystemIcons.Information;
+        ni.BalloonTipTitle = $"Last access by {log.MemberId}";
+        ni.BalloonTipText = status;
+        ni.ShowBalloonTip(3000);
+        // auto dispose after short delay
+        await Task.Delay(4000);
+        ni.Dispose();
     }
 }

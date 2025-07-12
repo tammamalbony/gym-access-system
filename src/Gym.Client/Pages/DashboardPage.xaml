@@ -13,6 +13,7 @@
             <TextBlock Text="{Binding Summary.LateMembers}" Margin="2"/>
             <TextBlock Text="Outstanding Dues:" Margin="10,2,2,2"/>
             <TextBlock Text="{Binding Summary.OutstandingDuesCents}" Margin="2"/>
+            <Button Content="Latest Access" Click="Latest_Click" Margin="10,0,0,0" Width="100"/>
         </StackPanel>
         <TextBlock Text="Late Members" FontWeight="Bold" Margin="5"/>
         <DataGrid x:Name="LateGrid" Margin="5" AutoGenerateColumns="True"/>

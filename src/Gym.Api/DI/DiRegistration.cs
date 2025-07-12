@@ -28,5 +28,6 @@ public static class DiRegistration
         .AddScoped<IDashboardService, DashboardService>()
         .AddScoped<IUserService, UserService>()
         .AddScoped<ILogService, LogService>()
-        .AddScoped<IReminderService, ReminderService>();
+        .AddScoped<IReminderService, ReminderService>()
+        .AddScoped<IAlertService, AlertService>();
 }
