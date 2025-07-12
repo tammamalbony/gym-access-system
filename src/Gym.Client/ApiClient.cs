@@ -1,5 +1,6 @@
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Net.Http.Headers;
 using Gym.Client.Models;
 
 namespace Gym.Client;
@@ -10,6 +11,16 @@ public class ApiClient
     public ApiClient(string baseUrl)
     {
         _http = new HttpClient { BaseAddress = new(baseUrl) };
+    }
+
+    public async Task<bool> LoginAsync(string user, string password)
+    {
+        var resp = await _http.PostAsJsonAsync("api/auth/login", new { username = user, password });
+        if (!resp.IsSuccessStatusCode) return false;
+        var tok = await resp.Content.ReadFromJsonAsync<LoginResult>();
+        if (tok is null) return false;
+        _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tok.Access);
+        return true;
     }
 
     public Task<List<MemberDto>?> GetMembersAsync() =>

@@ -8,6 +8,7 @@
         Title="Gym Client" Height="450" Width="800">
     <DockPanel>
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Background="LightGray" Margin="5">
+            <Button Content="Login" Click="Login_Click" Margin="2"/>
             <Button Content="Dashboard" Click="Dashboard_Click" Margin="2"/>
             <Button Content="Members" Click="Members_Click" Margin="2"/>
             <Button Content="Plans" Click="Plans_Click" Margin="2"/>

@@ -10,6 +10,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        MainFrame.Content = new LoginPage(_api);
     }
 
 
@@ -46,6 +47,11 @@ public partial class MainWindow : Window
     private void Alerts_Click(object sender, RoutedEventArgs e)
     {
         MainFrame.Content = new AlertsPage(_api);
+    }
+
+    private void Login_Click(object sender, RoutedEventArgs e)
+    {
+        MainFrame.Content = new LoginPage(_api);
     }
 
 }
