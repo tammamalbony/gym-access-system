@@ -46,6 +46,7 @@ public class ApiClient
 
     public Task DeletePlanAsync(int id) => _http.DeleteAsync($"api/plans/{id}");
 
+
     public Task<List<SubscriptionDto>?> GetSubscriptionsAsync() =>
         _http.GetFromJsonAsync<List<SubscriptionDto>>("api/subscriptions");
 
@@ -109,4 +110,5 @@ public class ApiClient
 
     public Task SendReminderAsync(long subId) =>
         _http.PostAsync($"api/reminders/{subId}/send", null);
+
 }

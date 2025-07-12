@@ -12,6 +12,7 @@ public partial class MainWindow : Window
         InitializeComponent();
     }
 
+
     private void Dashboard_Click(object sender, RoutedEventArgs e)
     {
         MainFrame.Content = new DashboardPage(_api);
@@ -46,4 +47,5 @@ public partial class MainWindow : Window
     {
         MainFrame.Content = new AlertsPage(_api);
     }
+
 }
