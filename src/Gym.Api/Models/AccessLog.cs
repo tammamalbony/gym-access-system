@@ -5,8 +5,8 @@ namespace Gym.Api.Models;
 
 public enum AccessEventType
 {
-    Grant,
-    Deny
+    GRANT,
+    DENY
 }
 
 public class AccessLog

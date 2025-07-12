@@ -5,9 +5,9 @@ namespace Gym.Api.Models;
 
 public enum SubscriptionStatus
 {
-    Active,
-    Expired,
-    Cancelled
+    ACTIVE,
+    EXPIRED,
+    CANCELLED
 }
 
 public class Subscription

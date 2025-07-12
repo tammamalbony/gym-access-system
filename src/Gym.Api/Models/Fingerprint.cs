@@ -5,16 +5,16 @@ namespace Gym.Api.Models;
 
 public enum FingerLabel
 {
-    RightThumb,
-    RightIndex,
-    RightMiddle,
-    RightRing,
-    RightLittle,
-    LeftThumb,
-    LeftIndex,
-    LeftMiddle,
-    LeftRing,
-    LeftLittle
+    RIGHT_THUMB,
+    RIGHT_INDEX,
+    RIGHT_MIDDLE,
+    RIGHT_RING,
+    RIGHT_LITTLE,
+    LEFT_THUMB,
+    LEFT_INDEX,
+    LEFT_MIDDLE,
+    LEFT_RING,
+    LEFT_LITTLE
 }
 
 public class Fingerprint

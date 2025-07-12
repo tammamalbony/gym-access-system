@@ -5,9 +5,9 @@ namespace Gym.Api.Models;
 
 public enum PaymentMethod
 {
-    Cash,
-    Card,
-    Online
+    CASH,
+    CARD,
+    ONLINE
 }
 
 public class Payment

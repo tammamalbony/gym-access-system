@@ -5,9 +5,9 @@ namespace Gym.Api.Models;
 
 public enum AlertType
 {
-    Overdue,
-    TokenPushFail,
-    KycIssue
+    OVERDUE,
+    TOKEN_PUSH_FAIL,
+    KYC_ISSUE
 }
 
 public class EmailAlert

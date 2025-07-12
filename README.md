@@ -49,6 +49,7 @@ GRANT ALL ON gym_access_system.* TO 'gymapp'@'%';
 
 # 4️⃣  Update API settings
 copy appsettings.Production.json.example appsettings.Production.json
+copy .env.example .env                     # connection string & JWT secret
 notepad appsettings.Production.json        # add SMTP, DB, subnet
 
 # 5️⃣  Publish API as Windows service
@@ -134,6 +135,8 @@ C:\GymApp\
   }
 }
 ```
+
+Values can also be provided via environment variables or a `.env` file using the same keys, e.g. `CONNECTIONSTRINGS__DEFAULT` and `JWT__KEY`.
 
 ---
 

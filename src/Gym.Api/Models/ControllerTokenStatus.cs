@@ -5,9 +5,9 @@ namespace Gym.Api.Models;
 
 public enum PushStatus
 {
-    Pending,
-    Success,
-    Fail
+    PENDING,
+    SUCCESS,
+    FAIL
 }
 
 public class ControllerTokenStatus

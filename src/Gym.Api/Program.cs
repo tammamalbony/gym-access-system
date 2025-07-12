@@ -4,7 +4,9 @@ using Gym.Api.Endpoints;
 using Gym.Api.Middleware;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using DotNetEnv;
 
+Env.TraversePath().Load();
 var builder = WebApplication.CreateBuilder(args);
 
 // ---------------- logging ----------------

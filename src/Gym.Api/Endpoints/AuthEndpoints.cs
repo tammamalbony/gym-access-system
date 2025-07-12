@@ -25,7 +25,7 @@ public static class AuthEndpoints
             {
                 new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
                 new Claim(ClaimTypes.Name, user.Username),
-                new Claim(ClaimTypes.Role, user.Role)
+                new Claim(ClaimTypes.Role, user.Role.ToString())
             };
             var access  = tok.GenerateAccessToken(claims);
             var refresh = tok.GenerateRefreshToken();

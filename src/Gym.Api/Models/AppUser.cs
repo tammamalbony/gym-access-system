@@ -6,9 +6,9 @@ namespace Gym.Api.Models;
 
 public enum UserRole
 {
-    DataEntry,
-    Admin,
-    Support
+    DATA_ENTRY,
+    ADMIN,
+    SUPPORT
 }
 
 public class AppUser
