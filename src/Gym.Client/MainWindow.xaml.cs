@@ -6,11 +6,32 @@ namespace Gym.Client;
 public partial class MainWindow : Window
 {
     private readonly ApiClient _api = new("http://localhost:5000/");
+    private bool _loggedIn;
 
     public MainWindow()
     {
         InitializeComponent();
-        MainFrame.Content = new LoginPage(_api);
+        SetLoggedIn(false);
+        MainFrame.Content = new LoginPage(_api, OnLoggedIn);
+    }
+
+
+    private void SetLoggedIn(bool value)
+    {
+        _loggedIn = value;
+        DashboardBtn.IsEnabled = value;
+        MembersBtn.IsEnabled = value;
+        PlansBtn.IsEnabled = value;
+        UsersBtn.IsEnabled = value;
+        LogsBtn.IsEnabled = value;
+        RemindersBtn.IsEnabled = value;
+        AlertsBtn.IsEnabled = value;
+    }
+
+    private void OnLoggedIn()
+    {
+        SetLoggedIn(true);
+        MainFrame.Content = new DashboardPage(_api);
     }
 
 
@@ -51,7 +72,7 @@ public partial class MainWindow : Window
 
     private void Login_Click(object sender, RoutedEventArgs e)
     {
-        MainFrame.Content = new LoginPage(_api);
+        MainFrame.Content = new LoginPage(_api, OnLoggedIn);
     }
 
 }
