@@ -10,4 +10,8 @@ public class Plan
     public string? Description { get; set; }
     public int PriceCents { get; set; }
     public byte DurationMonths { get; set; }
+    public byte GraceDays { get; set; }
+    public bool IsActive { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
 }

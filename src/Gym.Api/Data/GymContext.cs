@@ -30,18 +30,36 @@ public class GymContext(DbContextOptions<GymContext> opts) : DbContext(opts)
             e.Property(m => m.FirstName).HasColumnName("first_name");
             e.Property(m => m.LastName).HasColumnName("last_name");
             e.Property(m => m.Email).HasColumnName("email");
+            e.Property(m => m.Phone).HasColumnName("phone");
+            e.Property(m => m.DateOfBirth).HasColumnName("date_of_birth");
+            e.Property(m => m.IdScanPath).HasColumnName("id_scan_path");
+            e.Property(m => m.KycComplete).HasColumnName("kyc_complete");
+            e.Property(m => m.CreatedAt).HasColumnName("created_at");
+            e.Property(m => m.UpdatedAt).HasColumnName("updated_at");
         });
         b.Entity<Plan>(e =>
         {
             e.ToTable("plans");
             e.HasKey(p => p.PlanId);
             e.Property(p => p.Name).HasColumnName("name");
+            e.Property(p => p.Description).HasColumnName("description");
+            e.Property(p => p.PriceCents).HasColumnName("price_cents");
+            e.Property(p => p.DurationMonths).HasColumnName("duration_months");
+            e.Property(p => p.GraceDays).HasColumnName("grace_days");
+            e.Property(p => p.IsActive).HasColumnName("is_active");
+            e.Property(p => p.CreatedAt).HasColumnName("created_at");
+            e.Property(p => p.UpdatedAt).HasColumnName("updated_at");
         });
         b.Entity<AppUser>(e =>
         {
             e.ToTable("app_users");
             e.HasKey(u => u.UserId);
             e.Property(u => u.Username).HasColumnName("username");
+            e.Property(u => u.PasswordHash).HasColumnName("password_hash");
+            e.Property(u => u.Role).HasColumnName("role").HasConversion<string>();
+            e.Property(u => u.Email).HasColumnName("email");
+            e.Property(u => u.IsEnabled).HasColumnName("is_enabled");
+            e.Property(u => u.CreatedAt).HasColumnName("created_at");
         });
         b.Entity<Fingerprint>(e =>
         {
