@@ -34,6 +34,10 @@ builder.Services.AddHostedService<BackupService>();
 
 builder.Services.AddAuthorization();
 
+// return enums as strings for consistent client models
+builder.Services.ConfigureHttpJsonOptions(o =>
+    o.SerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter()));
+
 builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddEndpointsApiExplorer();
