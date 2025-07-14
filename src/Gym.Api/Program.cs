@@ -10,6 +10,7 @@ using DotNetEnv;
 
 Env.TraversePath().Load();
 var builder = WebApplication.CreateBuilder(args);
+builder.WebHost.UseUrls("http://localhost:5000");
 
 // ---------------- logging ----------------
 Log.Logger = new LoggerConfiguration()
@@ -30,6 +31,12 @@ builder.Services.Configure<AlertOptions>(builder.Configuration.GetSection("Alert
 builder.Services.AddRepositories();
 builder.Services.AddServices();
 builder.Services.AddHostedService<BackupService>();
+
+builder.Services.AddAuthorization();
+
+// return enums as strings for consistent client models
+builder.Services.ConfigureHttpJsonOptions(o =>
+    o.SerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter()));
 
 builder.Services.AddAutoMapper(typeof(Program));
 

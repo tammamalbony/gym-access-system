@@ -1,5 +1,6 @@
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Net.Http.Headers;
 using Gym.Client.Models;
 
 namespace Gym.Client;
@@ -10,6 +11,53 @@ public class ApiClient
     public ApiClient(string baseUrl)
     {
         _http = new HttpClient { BaseAddress = new(baseUrl) };
+    }
+
+    public void Logout()
+    {
+        _http.DefaultRequestHeaders.Authorization = null;
+    }
+
+    public record ApiResult(bool Success, string? Error);
+
+    public async Task<ApiResult> LoginAsync(string user, string password)
+    {
+        try
+        {
+            var resp = await _http.PostAsJsonAsync("api/auth/login", new { username = user, password });
+            if (!resp.IsSuccessStatusCode)
+            {
+                var msg = await resp.Content.ReadAsStringAsync();
+                return new(false, string.IsNullOrWhiteSpace(msg) ? "Invalid credentials" : msg);
+            }
+            var tok = await resp.Content.ReadFromJsonAsync<LoginResult>();
+            if (tok is null)
+                return new(false, "Invalid response from server");
+            _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tok.Access);
+            return new(true, null);
+        }
+        catch (Exception ex)
+        {
+            return new(false, ex.Message);
+        }
+    }
+
+    public async Task<ApiResult> SignUpAsync(string user, string email, string password)
+    {
+        try
+        {
+            var resp = await _http.PostAsJsonAsync("api/auth/signup", new { username = user, email, password });
+            if (!resp.IsSuccessStatusCode)
+            {
+                var msg = await resp.Content.ReadAsStringAsync();
+                return new(false, string.IsNullOrWhiteSpace(msg) ? "Signup failed" : msg);
+            }
+            return new(true, null);
+        }
+        catch (Exception ex)
+        {
+            return new(false, ex.Message);
+        }
     }
 
     public Task<List<MemberDto>?> GetMembersAsync() =>

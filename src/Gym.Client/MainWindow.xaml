@@ -7,15 +7,21 @@
         mc:Ignorable="d"
         Title="Gym Client" Height="450" Width="800">
     <DockPanel>
-        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Background="LightGray" Margin="5">
-            <Button Content="Dashboard" Click="Dashboard_Click" Margin="2"/>
-            <Button Content="Members" Click="Members_Click" Margin="2"/>
-            <Button Content="Plans" Click="Plans_Click" Margin="2"/>
-            <Button Content="Users" Click="Users_Click" Margin="2"/>
-            <Button Content="Logs" Click="Logs_Click" Margin="2"/>
-            <Button Content="Reminders" Click="Reminders_Click" Margin="2"/>
-            <Button Content="Alerts" Click="Alerts_Click" Margin="2"/>
-        </StackPanel>
+        <Border Background="#333" Padding="5" DockPanel.Dock="Top">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel.Resources>
+                    <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}" />
+                </StackPanel.Resources>
+                <Button x:Name="LoginBtn" Content="Login" Click="Login_Click" Margin="2"/>
+                <Button x:Name="DashboardBtn" Content="Dashboard" Click="Dashboard_Click" Margin="2"/>
+                <Button x:Name="MembersBtn" Content="Members" Click="Members_Click" Margin="2"/>
+                <Button x:Name="PlansBtn" Content="Plans" Click="Plans_Click" Margin="2"/>
+                <Button x:Name="UsersBtn" Content="Users" Click="Users_Click" Margin="2"/>
+                <Button x:Name="LogsBtn" Content="Logs" Click="Logs_Click" Margin="2"/>
+                <Button x:Name="RemindersBtn" Content="Reminders" Click="Reminders_Click" Margin="2"/>
+                <Button x:Name="AlertsBtn" Content="Alerts" Click="Alerts_Click" Margin="2"/>
+            </StackPanel>
+        </Border>
         <Frame x:Name="MainFrame"/>
     </DockPanel>
 </Window>

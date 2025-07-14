@@ -12,7 +12,8 @@ This WPF desktop application acts as the front-desk interface for the Gym Access
    dotnet run --project src/Gym.Client
    ```
 
-   The application launches a window with a simple navigation bar.
+   The application launches with a login page. Enter a valid username and
+   password to enable the navigation bar.
 
 ## Features
 
@@ -32,4 +33,4 @@ The API base URL is set in `MainWindow.xaml.cs` when creating the `ApiClient` in
 
 ---
 
-This client is intentionally lightweight and meant for demonstration. It does not implement authentication or advanced error handling.
+This client is intentionally lightweight and meant for demonstration. Only a basic login mechanism is provided and advanced error handling is omitted.

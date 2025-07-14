@@ -27,6 +27,7 @@ public class GymContext(DbContextOptions<GymContext> opts) : DbContext(opts)
         {
             e.ToTable("members");
             e.HasKey(m => m.MemberId);
+            e.Property(m => m.MemberId).HasColumnName("member_id");
             e.Property(m => m.FirstName).HasColumnName("first_name");
             e.Property(m => m.LastName).HasColumnName("last_name");
             e.Property(m => m.Email).HasColumnName("email");
@@ -41,6 +42,7 @@ public class GymContext(DbContextOptions<GymContext> opts) : DbContext(opts)
         {
             e.ToTable("plans");
             e.HasKey(p => p.PlanId);
+            e.Property(p => p.PlanId).HasColumnName("plan_id");
             e.Property(p => p.Name).HasColumnName("name");
             e.Property(p => p.Description).HasColumnName("description");
             e.Property(p => p.PriceCents).HasColumnName("price_cents");
@@ -54,6 +56,7 @@ public class GymContext(DbContextOptions<GymContext> opts) : DbContext(opts)
         {
             e.ToTable("app_users");
             e.HasKey(u => u.UserId);
+            e.Property(u => u.UserId).HasColumnName("user_id");
             e.Property(u => u.Username).HasColumnName("username");
             e.Property(u => u.PasswordHash).HasColumnName("password_hash");
             e.Property(u => u.Role).HasColumnName("role").HasConversion<string>();
@@ -65,6 +68,7 @@ public class GymContext(DbContextOptions<GymContext> opts) : DbContext(opts)
         {
             e.ToTable("fingerprints");
             e.HasKey(f => f.FingerprintId);
+            e.Property(f => f.FingerprintId).HasColumnName("fingerprint_id");
             e.Property(f => f.MemberId).HasColumnName("member_id");
             e.Property(f => f.FingerLabel).HasColumnName("finger_label").HasConversion<string>();
             e.Property(f => f.TemplateBlob).HasColumnName("template_blob");
@@ -75,6 +79,7 @@ public class GymContext(DbContextOptions<GymContext> opts) : DbContext(opts)
         {
             e.ToTable("subscriptions");
             e.HasKey(s => s.SubscriptionId);
+            e.Property(s => s.SubscriptionId).HasColumnName("subscription_id");
             e.Property(s => s.MemberId).HasColumnName("member_id");
             e.Property(s => s.PlanId).HasColumnName("plan_id");
             e.Property(s => s.StartDate).HasColumnName("start_date");
@@ -87,6 +92,7 @@ public class GymContext(DbContextOptions<GymContext> opts) : DbContext(opts)
         {
             e.ToTable("payments");
             e.HasKey(p => p.PaymentId);
+            e.Property(p => p.PaymentId).HasColumnName("payment_id");
             e.Property(p => p.SubscriptionId).HasColumnName("subscription_id");
             e.Property(p => p.AmountCents).HasColumnName("amount_cents");
             e.Property(p => p.PaidOn).HasColumnName("paid_on");
@@ -99,6 +105,7 @@ public class GymContext(DbContextOptions<GymContext> opts) : DbContext(opts)
         {
             e.ToTable("controllers");
             e.HasKey(c => c.ControllerId);
+            e.Property(c => c.ControllerId).HasColumnName("controller_id");
             e.Property(c => c.Name).HasColumnName("name");
             e.Property(c => c.IpAddress).HasColumnName("ip_address");
             e.Property(c => c.FirmwareVersion).HasColumnName("firmware_version");
@@ -108,6 +115,7 @@ public class GymContext(DbContextOptions<GymContext> opts) : DbContext(opts)
         {
             e.ToTable("access_tokens");
             e.HasKey(t => t.TokenId);
+            e.Property(t => t.TokenId).HasColumnName("token_id");
             e.Property(t => t.MemberId).HasColumnName("member_id");
             e.Property(t => t.TokenValue).HasColumnName("token_value");
             e.Property(t => t.IssuedAt).HasColumnName("issued_at");
@@ -127,6 +135,7 @@ public class GymContext(DbContextOptions<GymContext> opts) : DbContext(opts)
         {
             e.ToTable("access_logs");
             e.HasKey(l => l.LogId);
+            e.Property(l => l.LogId).HasColumnName("log_id");
             e.Property(l => l.ControllerId).HasColumnName("controller_id");
             e.Property(l => l.MemberId).HasColumnName("member_id");
             e.Property(l => l.EventType).HasColumnName("event_type").HasConversion<string>();
@@ -137,6 +146,7 @@ public class GymContext(DbContextOptions<GymContext> opts) : DbContext(opts)
         {
             e.ToTable("email_alerts");
             e.HasKey(a => a.AlertId);
+            e.Property(a => a.AlertId).HasColumnName("alert_id");
             e.Property(a => a.AlertType).HasColumnName("alert_type").HasConversion<string>();
             e.Property(a => a.RelatedMember).HasColumnName("related_member");
             e.Property(a => a.Details).HasColumnName("details");

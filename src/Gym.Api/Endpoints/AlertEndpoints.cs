@@ -10,7 +10,8 @@ public static class AlertEndpoints
 {
     public static RouteGroupBuilder MapAlertEndpoints(this RouteGroupBuilder g)
     {
-        var group = g.MapGroup("alerts").RequireAuthorization(Roles.ADMIN);
+        var group = g.MapGroup("alerts")
+            .RequireAuthorization(p => p.RequireRole(Roles.ADMIN));
         group.MapGet("", async (IAlertService svc) => Results.Ok(await svc.All()));
         return g;
     }

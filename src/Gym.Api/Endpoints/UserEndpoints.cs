@@ -12,7 +12,8 @@ public static class UserEndpoints
 {
     public static RouteGroupBuilder MapUserEndpoints(this RouteGroupBuilder g)
     {
-        var group = g.MapGroup("users").RequireAuthorization(Roles.ADMIN);
+        var group = g.MapGroup("users")
+            .RequireAuthorization(p => p.RequireRole(Roles.ADMIN));
 
         group.MapGet("", async (IUserService svc) => Results.Ok(await svc.All()));
         group.MapGet("/{id:int}", async (int id, IUserService svc) =>

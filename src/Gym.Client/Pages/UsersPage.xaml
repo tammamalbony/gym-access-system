@@ -13,6 +13,10 @@
         </StackPanel>
         <TextBlock Text="Active Users:" Margin="5"/>
         <TextBlock x:Name="ActiveText" Margin="5"/>
-        <DataGrid x:Name="Grid" Margin="5" AutoGenerateColumns="True"/>
+        <DataGrid x:Name="Grid" Margin="5" AutoGenerateColumns="True"
+                  VirtualizingPanel.IsVirtualizing="True"
+                  VirtualizingPanel.VirtualizationMode="Recycling"
+                  EnableRowVirtualization="True" EnableColumnVirtualization="True"
+                  ContextMenu="{x:Null}"/>
     </DockPanel>
 </Page>

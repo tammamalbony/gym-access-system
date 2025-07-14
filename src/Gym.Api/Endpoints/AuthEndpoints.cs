@@ -3,7 +3,6 @@
 // File: Endpoints/AuthEndpoints.cs (unchanged)
 // =============================
 using Gym.Api.Auth;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Security.Claims;
 using Gym.Api.Data;
 using Gym.Api.Models;
@@ -17,9 +16,9 @@ public static class AuthEndpoints
     {
         g.MapPost("auth/login", async (LoginRequest req, GymContext db, ITokenService tok) =>
         {
-            string hash = Hash(req.Password);
-            var user = await db.AppUsers.FirstOrDefaultAsync(u => u.Username == req.Username && u.PasswordHash == hash);
-            if (user is null) return Results.Unauthorized();
+            var user = await db.AppUsers.FirstOrDefaultAsync(u => u.Username == req.Username);
+            if (user is null || !BCrypt.Net.BCrypt.Verify(req.Password, user.PasswordHash))
+                return Results.Json("Invalid username or password", statusCode: 401);
 
             var claims = new[]
             {
@@ -32,10 +31,27 @@ public static class AuthEndpoints
             // TODO: persist refresh token & expiry
             return Results.Ok(new { access, refresh });
         }).AllowAnonymous();
+
+        g.MapPost("auth/signup", async (SignupRequest req, GymContext db) =>
+        {
+            if (await db.AppUsers.AnyAsync(u => u.Username == req.Username))
+                return Results.BadRequest("Username already exists");
+            var user = new AppUser
+            {
+                Username = req.Username,
+                Email = req.Email,
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(req.Password),
+                Role = UserRole.DATA_ENTRY,
+                IsEnabled = true,
+                CreatedAt = DateTime.UtcNow
+            };
+            db.AppUsers.Add(user);
+            await db.SaveChangesAsync();
+            return Results.Created($"/api/users/{user.UserId}", new { user.UserId, user.Username });
+        }).AllowAnonymous();
         return g;
     }
 
-    private static string Hash(string pwd) => Convert.ToHexString(KeyDerivation.Pbkdf2(pwd, new byte[16], KeyDerivationPrf.HMACSHA256, 600000, 32));
-
     public record LoginRequest(string Username, string Password);
+    public record SignupRequest(string Username, string Email, string Password);
 }

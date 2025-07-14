@@ -6,10 +6,43 @@ namespace Gym.Client;
 public partial class MainWindow : Window
 {
     private readonly ApiClient _api = new("http://localhost:5000/");
+    private bool _loggedIn;
 
     public MainWindow()
     {
         InitializeComponent();
+        SetLoggedIn(false);
+        ShowLogin();
+    }
+
+
+    private void SetLoggedIn(bool value)
+    {
+        _loggedIn = value;
+        LoginBtn.Content = value ? "Logout" : "Login";
+        DashboardBtn.IsEnabled = value;
+        MembersBtn.IsEnabled = value;
+        PlansBtn.IsEnabled = value;
+        UsersBtn.IsEnabled = value;
+        LogsBtn.IsEnabled = value;
+        RemindersBtn.IsEnabled = value;
+        AlertsBtn.IsEnabled = value;
+    }
+
+    private void OnLoggedIn()
+    {
+        SetLoggedIn(true);
+        MainFrame.Content = new DashboardPage(_api);
+    }
+
+    private void ShowLogin()
+    {
+        MainFrame.Content = new LoginPage(_api, OnLoggedIn, ShowSignup);
+    }
+
+    private void ShowSignup()
+    {
+        MainFrame.Content = new SignUpPage(_api, OnLoggedIn, ShowLogin);
     }
 
 
@@ -46,6 +79,21 @@ public partial class MainWindow : Window
     private void Alerts_Click(object sender, RoutedEventArgs e)
     {
         MainFrame.Content = new AlertsPage(_api);
+    }
+
+    private void Login_Click(object sender, RoutedEventArgs e)
+    {
+        if (_loggedIn)
+        {
+            // log out and return to login page
+            _api.Logout();
+            SetLoggedIn(false);
+            ShowLogin();
+        }
+        else
+        {
+            ShowLogin();
+        }
     }
 
 }

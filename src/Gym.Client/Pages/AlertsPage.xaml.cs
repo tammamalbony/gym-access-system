@@ -15,6 +15,7 @@ public partial class AlertsPage : Page
         InitializeComponent();
         _api = api;
         Grid.ItemsSource = Items;
+        Loaded += Refresh_Click;
     }
 
     private async void Refresh_Click(object sender, RoutedEventArgs e)

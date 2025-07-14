@@ -4,6 +4,7 @@
 // =============================
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.DependencyInjection;
 using System.Text;
 
 namespace Gym.Api.Auth;
@@ -14,6 +15,8 @@ static class AuthExtensions
         svc.Configure<JwtSettings>(cfg.GetSection("Jwt"));
         var settings = cfg.GetSection("Jwt").Get<JwtSettings>()!;
         var key = Encoding.UTF8.GetBytes(settings.Key);
+
+        svc.AddScoped<ITokenService, TokenService>();
 
         svc.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
            .AddJwtBearer(o =>
