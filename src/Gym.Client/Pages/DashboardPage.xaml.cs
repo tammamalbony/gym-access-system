@@ -22,6 +22,7 @@ public partial class DashboardPage : Page
         DataContext = this;
         LateGrid.ItemsSource = LateItems;
         SubGrid.ItemsSource = SubItems;
+        Loaded += Refresh_Click;
     }
 
     private async void Refresh_Click(object sender, RoutedEventArgs e)
