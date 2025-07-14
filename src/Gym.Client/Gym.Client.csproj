@@ -9,4 +9,8 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="../Gym.Core/Gym.Core.csproj" />
+  </ItemGroup>
+
 </Project>

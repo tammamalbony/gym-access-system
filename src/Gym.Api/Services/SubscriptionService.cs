@@ -2,7 +2,7 @@
 // File: Services/SubscriptionService.cs
 // -----------------------------
 using AutoMapper;
-using Gym.Api.Dtos;
+using Gym.Core.Dtos;
 using Gym.Api.Repositories;
 using Gym.Api.Models;
 

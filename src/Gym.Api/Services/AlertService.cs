@@ -2,7 +2,7 @@
 // File: Services/AlertService.cs
 // -----------------------------
 using AutoMapper;
-using Gym.Api.Dtos;
+using Gym.Core.Dtos;
 using Gym.Api.Repositories;
 
 namespace Gym.Api.Services;

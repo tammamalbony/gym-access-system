@@ -1,4 +1,4 @@
-namespace Gym.Api.Dtos;
+namespace Gym.Core.Dtos;
 
 public record AppUserDto(
     int Id,

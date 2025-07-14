@@ -1,7 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using Gym.Client.Models;
+using Gym.Core.Dtos;
 
 using Gym.Client.Dialogs;
 namespace Gym.Client.Pages;

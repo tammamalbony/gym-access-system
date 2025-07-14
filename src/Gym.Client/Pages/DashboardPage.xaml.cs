@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Drawing;
-using Gym.Client.Models;
+using Gym.Core.Dtos;
 
 namespace Gym.Client.Pages;
 

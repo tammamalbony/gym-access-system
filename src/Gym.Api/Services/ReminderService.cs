@@ -1,7 +1,7 @@
 // -----------------------------
 // File: Services/ReminderService.cs
 // -----------------------------
-using Gym.Api.Dtos;
+using Gym.Core.Dtos;
 using Gym.Api.Models;
 using Gym.Api.Repositories;
 using System.Linq;
