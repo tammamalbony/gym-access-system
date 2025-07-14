@@ -19,11 +19,13 @@
         <DataGrid x:Name="LateGrid" Margin="5" AutoGenerateColumns="True"
                   VirtualizingPanel.IsVirtualizing="True"
                   VirtualizingPanel.VirtualizationMode="Recycling"
-                  EnableRowVirtualization="True" EnableColumnVirtualization="True"/>
+                  EnableRowVirtualization="True" EnableColumnVirtualization="True"
+                  ContextMenu="{x:Null}"/>
         <TextBlock Text="All Subscriptions" FontWeight="Bold" Margin="5"/>
         <DataGrid x:Name="SubGrid" Margin="5" AutoGenerateColumns="True"
                   VirtualizingPanel.IsVirtualizing="True"
                   VirtualizingPanel.VirtualizationMode="Recycling"
-                  EnableRowVirtualization="True" EnableColumnVirtualization="True"/>
+                  EnableRowVirtualization="True" EnableColumnVirtualization="True"
+                  ContextMenu="{x:Null}"/>
     </DockPanel>
 </Page>

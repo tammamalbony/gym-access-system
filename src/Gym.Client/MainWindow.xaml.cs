@@ -19,6 +19,7 @@ public partial class MainWindow : Window
     private void SetLoggedIn(bool value)
     {
         _loggedIn = value;
+        LoginBtn.Content = value ? "Logout" : "Login";
         DashboardBtn.IsEnabled = value;
         MembersBtn.IsEnabled = value;
         PlansBtn.IsEnabled = value;
@@ -82,7 +83,17 @@ public partial class MainWindow : Window
 
     private void Login_Click(object sender, RoutedEventArgs e)
     {
-        ShowLogin();
+        if (_loggedIn)
+        {
+            // log out and return to login page
+            _api.Logout();
+            SetLoggedIn(false);
+            ShowLogin();
+        }
+        else
+        {
+            ShowLogin();
+        }
     }
 
 }

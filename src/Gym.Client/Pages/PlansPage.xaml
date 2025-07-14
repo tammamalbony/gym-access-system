@@ -15,6 +15,7 @@
         <DataGrid x:Name="Grid" Margin="5" AutoGenerateColumns="True"
                   VirtualizingPanel.IsVirtualizing="True"
                   VirtualizingPanel.VirtualizationMode="Recycling"
-                  EnableRowVirtualization="True" EnableColumnVirtualization="True"/>
+                  EnableRowVirtualization="True" EnableColumnVirtualization="True"
+                  ContextMenu="{x:Null}"/>
     </DockPanel>
 </Page>

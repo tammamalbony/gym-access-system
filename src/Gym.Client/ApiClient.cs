@@ -13,6 +13,11 @@ public class ApiClient
         _http = new HttpClient { BaseAddress = new(baseUrl) };
     }
 
+    public void Logout()
+    {
+        _http.DefaultRequestHeaders.Authorization = null;
+    }
+
     public record ApiResult(bool Success, string? Error);
 
     public async Task<ApiResult> LoginAsync(string user, string password)
