@@ -10,7 +10,8 @@ public static class ReminderEndpoints
 {
     public static RouteGroupBuilder MapReminderEndpoints(this RouteGroupBuilder g)
     {
-        var group = g.MapGroup("reminders").RequireAuthorization(Roles.ADMIN);
+        var group = g.MapGroup("reminders")
+            .RequireAuthorization(p => p.RequireRole(Roles.ADMIN));
 
         group.MapGet("tomorrow", async (IReminderService svc) =>
         {
