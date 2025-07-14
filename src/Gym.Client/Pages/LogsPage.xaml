@@ -6,6 +6,10 @@
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="5">
             <Button Content="Refresh" Click="Refresh_Click" Margin="2"/>
         </StackPanel>
-        <DataGrid x:Name="Grid" Margin="5" AutoGenerateColumns="True"/>
+        <DataGrid x:Name="Grid" Margin="5" AutoGenerateColumns="True"
+                  VirtualizingPanel.IsVirtualizing="True"
+                  VirtualizingPanel.VirtualizationMode="Recycling"
+                  EnableRowVirtualization="True" EnableColumnVirtualization="True"
+                  ContextMenu="{x:Null}"/>
     </DockPanel>
 </Page>

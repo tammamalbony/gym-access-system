@@ -13,14 +13,51 @@ public class ApiClient
         _http = new HttpClient { BaseAddress = new(baseUrl) };
     }
 
-    public async Task<bool> LoginAsync(string user, string password)
+    public void Logout()
     {
-        var resp = await _http.PostAsJsonAsync("api/auth/login", new { username = user, password });
-        if (!resp.IsSuccessStatusCode) return false;
-        var tok = await resp.Content.ReadFromJsonAsync<LoginResult>();
-        if (tok is null) return false;
-        _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tok.Access);
-        return true;
+        _http.DefaultRequestHeaders.Authorization = null;
+    }
+
+    public record ApiResult(bool Success, string? Error);
+
+    public async Task<ApiResult> LoginAsync(string user, string password)
+    {
+        try
+        {
+            var resp = await _http.PostAsJsonAsync("api/auth/login", new { username = user, password });
+            if (!resp.IsSuccessStatusCode)
+            {
+                var msg = await resp.Content.ReadAsStringAsync();
+                return new(false, string.IsNullOrWhiteSpace(msg) ? "Invalid credentials" : msg);
+            }
+            var tok = await resp.Content.ReadFromJsonAsync<LoginResult>();
+            if (tok is null)
+                return new(false, "Invalid response from server");
+            _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tok.Access);
+            return new(true, null);
+        }
+        catch (Exception ex)
+        {
+            return new(false, ex.Message);
+        }
+    }
+
+    public async Task<ApiResult> SignUpAsync(string user, string email, string password)
+    {
+        try
+        {
+            var resp = await _http.PostAsJsonAsync("api/auth/signup", new { username = user, email, password });
+            if (!resp.IsSuccessStatusCode)
+            {
+                var msg = await resp.Content.ReadAsStringAsync();
+                return new(false, string.IsNullOrWhiteSpace(msg) ? "Signup failed" : msg);
+            }
+            return new(true, null);
+        }
+        catch (Exception ex)
+        {
+            return new(false, ex.Message);
+        }
     }
 
     public Task<List<MemberDto>?> GetMembersAsync() =>

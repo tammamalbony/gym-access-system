@@ -12,13 +12,14 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         SetLoggedIn(false);
-        MainFrame.Content = new LoginPage(_api, OnLoggedIn);
+        ShowLogin();
     }
 
 
     private void SetLoggedIn(bool value)
     {
         _loggedIn = value;
+        LoginBtn.Content = value ? "Logout" : "Login";
         DashboardBtn.IsEnabled = value;
         MembersBtn.IsEnabled = value;
         PlansBtn.IsEnabled = value;
@@ -32,6 +33,16 @@ public partial class MainWindow : Window
     {
         SetLoggedIn(true);
         MainFrame.Content = new DashboardPage(_api);
+    }
+
+    private void ShowLogin()
+    {
+        MainFrame.Content = new LoginPage(_api, OnLoggedIn, ShowSignup);
+    }
+
+    private void ShowSignup()
+    {
+        MainFrame.Content = new SignUpPage(_api, OnLoggedIn, ShowLogin);
     }
 
 
@@ -72,7 +83,17 @@ public partial class MainWindow : Window
 
     private void Login_Click(object sender, RoutedEventArgs e)
     {
-        MainFrame.Content = new LoginPage(_api, OnLoggedIn);
+        if (_loggedIn)
+        {
+            // log out and return to login page
+            _api.Logout();
+            SetLoggedIn(false);
+            ShowLogin();
+        }
+        else
+        {
+            ShowLogin();
+        }
     }
 
 }
