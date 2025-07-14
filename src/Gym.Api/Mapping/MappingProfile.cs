@@ -40,6 +40,9 @@ public class MappingProfile : Profile
 
         CreateMap<EmailAlert, EmailAlertDto>()
             .ForCtorParam("Id", o => o.MapFrom(s => s.AlertId))
-            .ForCtorParam("AlertType", o => o.MapFrom(s => s.AlertType.ToString()));
+            .ForCtorParam("AlertType", o => o.MapFrom(s => s.AlertType.ToString()))
+            .ForCtorParam("MemberId", o => o.MapFrom(s => s.RelatedMember))
+            .ForCtorParam("Details", o => o.MapFrom(s => s.Details))
+            .ForCtorParam("SentAt", o => o.MapFrom(s => s.SentAt));
     }
 }

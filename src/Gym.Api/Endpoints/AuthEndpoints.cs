@@ -18,7 +18,7 @@ public static class AuthEndpoints
         {
             var user = await db.AppUsers.FirstOrDefaultAsync(u => u.Username == req.Username);
             if (user is null || !BCrypt.Net.BCrypt.Verify(req.Password, user.PasswordHash))
-                return Results.Unauthorized();
+                return Results.Json("Invalid username or password", statusCode: 401);
 
             var claims = new[]
             {
