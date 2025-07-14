@@ -3,7 +3,7 @@
 // File: Services/PlanService.cs
 // -----------------------------
 using AutoMapper;
-using Gym.Api.Dtos;
+using Gym.Core.Dtos;
 using Gym.Api.Models;
 using Gym.Api.Repositories;
 

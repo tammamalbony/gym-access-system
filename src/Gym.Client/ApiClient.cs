@@ -1,7 +1,7 @@
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Net.Http.Headers;
-using Gym.Client.Models;
+using Gym.Core.Dtos;
 
 namespace Gym.Client;
 

@@ -1,4 +1,4 @@
-namespace Gym.Client.Models;
+namespace Gym.Core.Dtos;
 
 public record SubscriptionDto(
     long Id,

@@ -2,7 +2,7 @@
 // =============================
 // File: Endpoints/MemberEndpoints.cs
 // =============================
-using Gym.Api.Dtos;
+using Gym.Core.Dtos;
 using Gym.Api.Services;
 using Gym.Api.Auth;
 using Microsoft.AspNetCore.Authorization;

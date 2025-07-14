@@ -7,10 +7,10 @@
       Title="Members">
     <DockPanel>
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="5">
-            <Button Content="Refresh" Click="Refresh_Click" Margin="2" />
-            <Button Content="Add" Click="Add_Click" Margin="2" />
-            <Button Content="Edit" Click="Edit_Click" Margin="2" />
-            <Button Content="Delete" Click="Delete_Click" Margin="2" />
+            <Button Content="Refresh" Command="{Binding RefreshCommand}" Margin="2" />
+            <Button Content="Add" Command="{Binding AddCommand}" Margin="2" />
+            <Button Content="Edit" Command="{Binding EditCommand}" CommandParameter="{Binding SelectedItem, ElementName=Grid}" Margin="2" />
+            <Button Content="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedItem, ElementName=Grid}" Margin="2" />
         </StackPanel>
         <DataGrid x:Name="Grid" Margin="5" AutoGenerateColumns="True"
                   VirtualizingPanel.IsVirtualizing="True"

@@ -1,8 +1,4 @@
-
-// =============================
-// File: Dtos/PlanDto.cs
-// =============================
-namespace Gym.Api.Dtos;
+namespace Gym.Core.Dtos;
 
 public record PlanDto(
     int Id,

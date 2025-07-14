@@ -3,7 +3,7 @@
 // File: Mapping/MappingProfile.cs
 // =============================
 using AutoMapper;
-using Gym.Api.Dtos;
+using Gym.Core.Dtos;
 using Gym.Api.Models;
 using System;
 

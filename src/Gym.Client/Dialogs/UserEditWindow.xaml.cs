@@ -1,5 +1,5 @@
 using System.Windows;
-using Gym.Client.Models;
+using Gym.Core.Dtos;
 
 namespace Gym.Client.Dialogs;
 

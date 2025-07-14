@@ -3,7 +3,7 @@
 // -----------------------------
 using AutoMapper;
 using BCrypt.Net;
-using Gym.Api.Dtos;
+using Gym.Core.Dtos;
 using Gym.Api.Models;
 using Gym.Api.Repositories;
 
